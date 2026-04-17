@@ -1,0 +1,16 @@
+timestamp,asset_id,alert_type,severity,sensor_value,note
+2026-03-10T02:14:00Z,A104,battery_low,medium,11.6,Overnight low battery alert
+2026-03-10T08:12:00Z,A102,error_code,high,E104,Trip start failed after ignition instability
+2026-03-10T08:18:00Z,A102,error_code,medium,E104,Repeated within same morning shift
+2026-03-10T12:32:00Z,A103,temperature_high,medium,8.4,Average trending above preferred band
+2026-03-10T13:05:00Z,A101,error_code,medium,E104,Trip fragmented after ignition fluctuation
+2026-03-11T02:09:00Z,A104,battery_low,medium,11.5,Repeated overnight low battery alert
+2026-03-11T07:10:00Z,A-108,temperature_high,high,10.2,North reefer above expected range
+2026-03-11T07:10:00Z,A-108,temperature_high,high,10.2,North reefer above expected range
+2026-03-11T07:35:00Z,A110,error_code,medium,E412,GPS lock slow at startup
+2026-03-11T08:02:00Z,A101,error_code,high,E104,No trips recorded despite engine activity
+2026-03-11T08:16:00Z,A102,error_code,high,E104,No trips recorded despite engine activity
+2026-03-11T09:44:00Z,A105,error_code,medium,E104,Single trip split after ignition fluctuation
+2026-03-11T10:20:00Z,A108,temperature_high,high,9.8,Daily average likely elevated
+2026-03-12T02:21:00Z,A104,battery_low,medium,11.4,Third overnight low battery alert
+2026-03-12T06:58:00Z,A110,error_code,medium,E412,Second consecutive startup GPS delay

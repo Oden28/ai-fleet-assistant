@@ -1,0 +1,11 @@
+question_id,category,question
+Q1,technical,Why is device model PX-200 not reporting trips?
+Q2,technical,What does error code E104 mean?
+Q3,technical,How should I troubleshoot repeated ignition anomalies?
+Q4,data,Which 5 assets had the highest idle time on 2026-03-11?
+Q5,data,Why did asset A104 trigger a battery alert three times between 2026-03-10 and 2026-03-12?
+Q6,data,Summarize unusual refrigerated temperature behavior in the North region on 2026-03-11.
+Q7,ambiguous,Why did asset A108 have issues yesterday?
+Q8,technical,If I see E104 and no trips on a PX-200 device, what should I check first?
+Q9,data,Which assets in the North region had zero trips on 2026-03-11?
+Q10,data,What patterns in the provided data suggest a maintenance follow-up is needed?

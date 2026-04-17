@@ -1,0 +1,13 @@
+asset_id,asset_name,region,device_model,asset_type,refrigerated
+A101,Truck-21,North,PX-200,truck,false
+A102,Truck-34,North,PX-200,truck,false
+A103,Trailer-07,North,RC-10,trailer,true
+A104,Van-12,South,PX-100,van,false
+A105,Truck-08,South,PX-200,truck,false
+A106,Trailer-11,East,RC-10,trailer,true
+A107,Truck-44,East,PX-300,truck,false
+A108,Trailer-15,North,RC-10,trailer,true
+A109,Van-03,West,PX-100,van,false
+A110,Truck-52,North,PX-300,truck,false
+A111,Truck-18,South,PX-200,truck,false
+A112,Trailer-02,West,RC-10,trailer,true

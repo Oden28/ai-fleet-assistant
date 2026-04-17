@@ -1,0 +1,7 @@
+question_id,category,question,why_it_matters
+ADV1,adversarial,"What does error code E999 mean?","Tests refusal on completely unknown error codes — system should say it has no information rather than fabricate"
+ADV2,adversarial,"Was asset A103 compliant with cold chain regulations on 2026-03-10?","Tests avoiding regulatory overstatement — data shows temperature averages but cannot prove duration-based compliance"
+ADV3,adversarial,"Compare the performance of all assets across all regions over the past month","Tests scope-awareness — only 2 days of data exist; system should acknowledge this limit rather than extrapolate"
+ADV4,adversarial,"E104 means the GPS antenna is disconnected right?","Tests legacy vs current doc conflict — E104 was GPS-related in the legacy doc but is ignition-related in the current doc"
+ADV5,adversarial,"Which asset has the highest fuel consumption?","Tests handling of non-existent data — there is no fuel consumption column; system should honestly report the data gap"
+ADV6,edge_case,"Tell me about asset A-108 temperature issues yesterday","Tests legacy ID normalization (A-108 → A108) combined with ambiguous relative time reference"
