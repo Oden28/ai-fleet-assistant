@@ -1,0 +1,400 @@
+[
+  {
+    "question_id": "Q1",
+    "category": "technical",
+    "question": "Why is device model PX-200 not reporting trips?",
+    "answer": "The PX-200 device may not be reporting trips due to several potential issues. According to the documentation, common causes include unstable or incorrect ignition input, firmware version below 4.2.0, GPS issues, and motion without ignition [trip_detection_px200.md]. Data analysis for assets A101 and A102, which use the PX-200 model, showed no reported trips on March 11, 2026. This could be due to device malfunction, lack of usage, or data transmission issues. Without additional context, it's difficult to pinpoint the exact cause for these specific devices.",
+    "confidence": "medium",
+    "is_clarification": false,
+    "clarification_question": null,
+    "sources_used": [
+      "trip_detection_px200.md"
+    ],
+    "caveats": [
+      "The data analysis is limited to March 11, 2026, and may not reflect ongoing issues.",
+      "The exact cause for the lack of trip reporting on that day is not clear without further investigation."
+    ],
+    "evidence": [
+      {
+        "source": "trip_detection_px200.md",
+        "excerpt": "# PX-200 Trip Detection Troubleshooting",
+        "authority": "current"
+      },
+      {
+        "source": "trip_detection_px200.md",
+        "excerpt": "## Summary\nPX-200 devices infer trips from a combination of ignition state, motion, and GPS quality.",
+        "authority": "current"
+      },
+      {
+        "source": "trip_detection_px200.md",
+        "excerpt": "## Notes\n- Repeated ignition anomalies often correlate with missing or split trips.\n- On PX-200, unstable ignition is a more common cause of missing trips than total GPS loss.",
+        "authority": "current"
+      },
+      {
+        "source": "trip_detection_px200.md",
+        "excerpt": "## Common Reasons Trips Are Not Reported\n1. Ignition input is unstable or wired incorrectly.\n2. Firmware is below `4.2.0`, which can undercount short trips after long idle periods.\n3. GPS fix is delay\u2026",
+        "authority": "current"
+      },
+      {
+        "source": "error_codes_current.md",
+        "excerpt": "## Interpretation Guidance\n- `E104` frequently appears alongside missing trips, trip fragmentation, or false idle inflation.\n- `E201` should be correlated with battery voltage readings and engine-off \u2026",
+        "authority": "current"
+      },
+      {
+        "source": "assets",
+        "excerpt": "Queried via generated pandas code",
+        "authority": "current"
+      },
+      {
+        "source": "metrics",
+        "excerpt": "Queried via generated pandas code",
+        "authority": "current"
+      }
+    ],
+    "reasoning_artifacts": [
+      {
+        "artifact_type": "retrieved_chunks",
+        "content": "[trip_detection_px200.md]\n# PX-200 Trip Detection Troubleshooting\n\n---\n\n[trip_detection_px200.md]\n## Summary\nPX-200 devices infer trips from a combination of ignition state, motion, and GPS quality.\n\n---\n\n[trip_detection_px200.md]\n## Notes\n- Repeated ignition anomalies often correlate with missing or split trips.\n- On PX-200, unstable ignition is a more common cause of missing trips than total GPS loss.\n\n---\n\n[trip_detection_px200.md]\n## Common Reasons Trips Are Not Reported\n1. Ignition input is unstable or wired incorrectly.\n2. Firmware is below `4.2.0`, which can undercount short trips after long idle periods.\n3. GPS fix is delayed or missing at trip start.\n4. Motion is recorded but ignition never transitions to an `on` state.\n\n---\n\n[error_codes_current.md]\n## Interpretation Guidance\n- `E104` frequently appears alongside missing trips, trip fragmentation, or false idle inflation.\n- `E201` should be correlated with battery voltage readings and engine-off timing.\n- `E412` can contribute to missing trip starts, but is less common than ignition instability on PX-200 devices."
+      },
+      {
+        "artifact_type": "pandas_code",
+        "content": "assets_px200 = assets[assets['device_model'] == 'PX-200']\nmetrics_px200 = metrics[metrics['asset_id'].isin(assets_px200['asset_id'])]\nno_trip_assets = metrics_px200[metrics_px200['trip_count'] == 0]\n\nif no_trip_assets.empty:\n    result = \"INSUFFICIENT_DATA: All PX-200 devices have reported trips in the available data.\"\nelse:\n    result = no_trip_assets[['asset_id', 'date']]"
+      },
+      {
+        "artifact_type": "query_result",
+        "content": "asset_id       date\n    A101 2026-03-11\n    A102 2026-03-11"
+      }
+    ]
+  },
+  {
+    "question_id": "Q2",
+    "category": "technical",
+    "question": "What does error code E104 mean?",
+    "answer": "Error code E104 indicates that the ignition voltage is unstable during the trip detection window. This error frequently appears alongside issues such as missing trips, trip fragmentation, or false idle inflation.",
+    "confidence": "high",
+    "is_clarification": false,
+    "clarification_question": null,
+    "sources_used": [
+      "error_codes_current.md"
+    ],
+    "caveats": [
+      "The legacy document described E104 differently, but it has been superseded by the current documentation."
+    ],
+    "evidence": [
+      {
+        "source": "error_codes_current.md",
+        "excerpt": "## Codes\n- `E104`: Ignition voltage unstable during trip detection window.\n- `E201`: Battery voltage below operational threshold.\n- `E315`: Temperature probe reading out of expected range.\n- `E412`: G\u2026",
+        "authority": "current"
+      },
+      {
+        "source": "error_codes_current.md",
+        "excerpt": "## Interpretation Guidance\n- `E104` frequently appears alongside missing trips, trip fragmentation, or false idle inflation.\n- `E201` should be correlated with battery voltage readings and engine-off \u2026",
+        "authority": "current"
+      },
+      {
+        "source": "error_codes_current.md",
+        "excerpt": "# Current Device Error Codes\n\nEffective date: 2026-01-15\nAuthority: Fleet Platform Support",
+        "authority": "current"
+      },
+      {
+        "source": "legacy_error_codes_2023.md",
+        "excerpt": "## Historical Codes\n- `E104`: GPS antenna disconnected.\n- `E201`: Main battery disconnected.\n- `E315`: Temperature probe calibration drift.",
+        "authority": "superseded"
+      },
+      {
+        "source": "legacy_error_codes_2023.md",
+        "excerpt": "# Legacy Error Code Reference\n\nStatus: Superseded in January 2025\nDo not use for current device behavior unless explicitly investigating older platform behavior.",
+        "authority": "superseded"
+      }
+    ],
+    "reasoning_artifacts": [
+      {
+        "artifact_type": "retrieved_chunks",
+        "content": "[error_codes_current.md]\n## Codes\n- `E104`: Ignition voltage unstable during trip detection window.\n- `E201`: Battery voltage below operational threshold.\n- `E315`: Temperature probe reading out of expected range.\n- `E412`: GPS lock not acquired within expected startup window.\n\n---\n\n[error_codes_current.md]\n## Interpretation Guidance\n- `E104` frequently appears alongside missing trips, trip fragmentation, or false idle inflation.\n- `E201` should be correlated with battery voltage readings and engine-off timing.\n- `E412` can contribute to missing trip starts, but is less common than ignition instability on PX-200 devices.\n\n---\n\n[error_codes_current.md]\n# Current Device Error Codes\n\nEffective date: 2026-01-15\nAuthority: Fleet Platform Support\n\n---\n\n[legacy_error_codes_2023.md] (LEGACY \u2014 SUPERSEDED)\n## Historical Codes\n- `E104`: GPS antenna disconnected.\n- `E201`: Main battery disconnected.\n- `E315`: Temperature probe calibration drift.\n\n---\n\n[legacy_error_codes_2023.md] (LEGACY \u2014 SUPERSEDED)\n# Legacy Error Code Reference\n\nStatus: Superseded in January 2025\nDo not use for current device behavior unless explicitly investigating older platform behavior."
+      }
+    ]
+  },
+  {
+    "question_id": "Q3",
+    "category": "technical",
+    "question": "How should I troubleshoot repeated ignition anomalies?",
+    "answer": "To troubleshoot repeated ignition anomalies, follow these steps:\n\n- Inspect the installation and check the quality of the ignition wire to ensure there are no physical issues causing the anomalies.\n- Review the ignition signal to see if it is flapping between on and off states, which can indicate a problem with the signal stability.\n- Correlate the anomalies with error code `E104`, which may provide additional context or confirmation of the issue.\n- Confirm that the issue is not due to a GPS startup delay, which can sometimes be mistaken for an ignition anomaly.\n\nThese steps will help identify and address the root cause of the ignition anomalies.",
+    "confidence": "high",
+    "is_clarification": false,
+    "clarification_question": null,
+    "sources_used": [
+      "ignition_anomalies.md"
+    ],
+    "caveats": [],
+    "evidence": [
+      {
+        "source": "ignition_anomalies.md",
+        "excerpt": "# Ignition Anomalies",
+        "authority": "current"
+      },
+      {
+        "source": "ignition_anomalies.md",
+        "excerpt": "## Definition\nAn ignition anomaly occurs when the ignition signal rapidly changes state, remains noisy, or does not align with motion and engine behavior.",
+        "authority": "current"
+      },
+      {
+        "source": "ignition_anomalies.md",
+        "excerpt": "## Why It Matters\nIgnition anomalies can cause:\n- missed trips\n- split trips\n- inflated idle time\n- false engine-on interpretation",
+        "authority": "current"
+      },
+      {
+        "source": "trip_detection_px200.md",
+        "excerpt": "## Notes\n- Repeated ignition anomalies often correlate with missing or split trips.\n- On PX-200, unstable ignition is a more common cause of missing trips than total GPS loss.",
+        "authority": "current"
+      },
+      {
+        "source": "ignition_anomalies.md",
+        "excerpt": "## First Checks\n1. Inspect installation and ignition wire quality.\n2. Review whether the signal is flapping between on and off.\n3. Correlate anomalies with error `E104`.\n4. Confirm the issue is not si\u2026",
+        "authority": "current"
+      }
+    ],
+    "reasoning_artifacts": [
+      {
+        "artifact_type": "retrieved_chunks",
+        "content": "[ignition_anomalies.md]\n# Ignition Anomalies\n\n---\n\n[ignition_anomalies.md]\n## Definition\nAn ignition anomaly occurs when the ignition signal rapidly changes state, remains noisy, or does not align with motion and engine behavior.\n\n---\n\n[ignition_anomalies.md]\n## Why It Matters\nIgnition anomalies can cause:\n- missed trips\n- split trips\n- inflated idle time\n- false engine-on interpretation\n\n---\n\n[trip_detection_px200.md]\n## Notes\n- Repeated ignition anomalies often correlate with missing or split trips.\n- On PX-200, unstable ignition is a more common cause of missing trips than total GPS loss.\n\n---\n\n[ignition_anomalies.md]\n## First Checks\n1. Inspect installation and ignition wire quality.\n2. Review whether the signal is flapping between on and off.\n3. Correlate anomalies with error `E104`.\n4. Confirm the issue is not simply GPS startup delay."
+      }
+    ]
+  },
+  {
+    "question_id": "Q4",
+    "category": "data",
+    "question": "Which 5 assets had the highest idle time on 2026-03-11?",
+    "answer": "On March 11, 2026, the five assets with the highest idle time were: Asset A110 with 268 idle minutes, Asset A102 with 241 idle minutes, Asset A105 with 233 idle minutes, Asset A107 with 221 idle minutes, and Asset A101 with 210 idle minutes.",
+    "confidence": "high",
+    "is_clarification": false,
+    "clarification_question": null,
+    "sources_used": [
+      "metrics"
+    ],
+    "caveats": [
+      "The analysis is based on data from a single day, March 11, 2026, which may not represent typical idle patterns over a longer period."
+    ],
+    "evidence": [
+      {
+        "source": "metrics",
+        "excerpt": "Queried via generated pandas code",
+        "authority": "current"
+      }
+    ],
+    "reasoning_artifacts": [
+      {
+        "artifact_type": "pandas_code",
+        "content": "date_filter = metrics['date'] == '2026-03-11'\ntop_idle_assets = metrics[date_filter].nlargest(5, 'idle_minutes')[['asset_id', 'idle_minutes']]\nresult = top_idle_assets"
+      },
+      {
+        "artifact_type": "query_result",
+        "content": "asset_id  idle_minutes\n    A110           268\n    A102           241\n    A105           233\n    A107           221\n    A101           210"
+      }
+    ]
+  },
+  {
+    "question_id": "Q5",
+    "category": "data",
+    "question": "Why did asset A104 trigger a battery alert three times between 2026-03-10 and 2026-03-12?",
+    "answer": "Asset A104 triggered a battery low alert three times between March 10, 2026, and March 12, 2026. This indicates that during this period, the asset experienced issues with its battery reaching low levels on three separate occasions.",
+    "confidence": "high",
+    "is_clarification": false,
+    "clarification_question": null,
+    "sources_used": [
+      "alerts"
+    ],
+    "caveats": [
+      "The data only covers the specific period from March 10, 2026, to March 12, 2026, and does not provide information on the reasons behind the battery low alerts or any corrective actions taken."
+    ],
+    "evidence": [
+      {
+        "source": "alerts",
+        "excerpt": "Queried via generated pandas code",
+        "authority": "current"
+      }
+    ],
+    "reasoning_artifacts": [
+      {
+        "artifact_type": "pandas_code",
+        "content": "result = alerts[(alerts['asset_id'] == 'A104') & (alerts['alert_type'] == 'battery_low')].shape[0]\nif result != 3:\n    result = \"INSUFFICIENT_DATA: Asset A104 did not trigger a battery alert three times in the given period.\""
+      },
+      {
+        "artifact_type": "query_result",
+        "content": "3"
+      }
+    ]
+  },
+  {
+    "question_id": "Q6",
+    "category": "data",
+    "question": "Summarize unusual refrigerated temperature behavior in the North region on 2026-03-11.",
+    "answer": "There is no available refrigeration temperature data for the North region on 2026-03-11, making it impossible to summarize any unusual temperature behavior for that date.",
+    "confidence": "low",
+    "is_clarification": false,
+    "clarification_question": null,
+    "sources_used": [],
+    "caveats": [
+      "The analysis is limited by the absence of data for the specified date, 2026-03-11."
+    ],
+    "evidence": [],
+    "reasoning_artifacts": [
+      {
+        "artifact_type": "pandas_code",
+        "content": "result = \"INSUFFICIENT_DATA: No refrigeration temperature data available for 2026-03-11.\""
+      },
+      {
+        "artifact_type": "query_result",
+        "content": "INSUFFICIENT_DATA: No refrigeration temperature data available for 2026-03-11."
+      }
+    ]
+  },
+  {
+    "question_id": "Q7",
+    "category": "ambiguous",
+    "question": "Why did asset A108 have issues yesterday?",
+    "answer": "Could you specify whether you are looking for alerts or performance metrics related to asset A108 on the specific date of 2026-03-11?",
+    "confidence": "low",
+    "is_clarification": true,
+    "clarification_question": "Could you specify whether you are looking for alerts or performance metrics related to asset A108 on the specific date of 2026-03-11?",
+    "sources_used": [],
+    "caveats": [
+      "Routing reasoning: The question references 'yesterday' without an absolute date, making it unclear when the issue occurred. Additionally, it is not specified what kind of issues are being referred to, which could require either technical or data analysis."
+    ],
+    "evidence": [],
+    "reasoning_artifacts": []
+  },
+  {
+    "question_id": "Q8",
+    "category": "technical",
+    "question": "If I see E104 and no trips on a PX-200 device",
+    "answer": "The presence of the E104 error code on a PX-200 device, combined with the absence of recorded trips, suggests that there is likely an issue with unstable ignition voltage during the trip detection window. This instability can prevent the device from accurately detecting and logging trips, as the PX-200 relies on ignition state, motion, and GPS quality to infer trips [Documentation evidence]. In the data analysis, two devices, A101 and A102, were identified with the E104 error and no trips recorded, reinforcing the likelihood that the E104 error is contributing to the lack of trip data [Data analysis evidence].",
+    "confidence": "high",
+    "is_clarification": false,
+    "clarification_question": null,
+    "sources_used": [
+      "Documentation evidence",
+      "Data analysis evidence"
+    ],
+    "caveats": [
+      "Without additional context or data, it is unclear if other factors might also be contributing to the lack of trips."
+    ],
+    "evidence": [
+      {
+        "source": "error_codes_current.md",
+        "excerpt": "## Interpretation Guidance\n- `E104` frequently appears alongside missing trips, trip fragmentation, or false idle inflation.\n- `E201` should be correlated with battery voltage readings and engine-off \u2026",
+        "authority": "current"
+      },
+      {
+        "source": "trip_detection_px200.md",
+        "excerpt": "## Summary\nPX-200 devices infer trips from a combination of ignition state, motion, and GPS quality.",
+        "authority": "current"
+      },
+      {
+        "source": "trip_detection_px200.md",
+        "excerpt": "# PX-200 Trip Detection Troubleshooting",
+        "authority": "current"
+      },
+      {
+        "source": "trip_detection_px200.md",
+        "excerpt": "## Notes\n- Repeated ignition anomalies often correlate with missing or split trips.\n- On PX-200, unstable ignition is a more common cause of missing trips than total GPS loss.",
+        "authority": "current"
+      },
+      {
+        "source": "error_codes_current.md",
+        "excerpt": "## Codes\n- `E104`: Ignition voltage unstable during trip detection window.\n- `E201`: Battery voltage below operational threshold.\n- `E315`: Temperature probe reading out of expected range.\n- `E412`: G\u2026",
+        "authority": "current"
+      },
+      {
+        "source": "alerts",
+        "excerpt": "Queried via generated pandas code",
+        "authority": "current"
+      },
+      {
+        "source": "assets",
+        "excerpt": "Queried via generated pandas code",
+        "authority": "current"
+      },
+      {
+        "source": "metrics",
+        "excerpt": "Queried via generated pandas code",
+        "authority": "current"
+      }
+    ],
+    "reasoning_artifacts": [
+      {
+        "artifact_type": "retrieved_chunks",
+        "content": "[error_codes_current.md]\n## Interpretation Guidance\n- `E104` frequently appears alongside missing trips, trip fragmentation, or false idle inflation.\n- `E201` should be correlated with battery voltage readings and engine-off timing.\n- `E412` can contribute to missing trip starts, but is less common than ignition instability on PX-200 devices.\n\n---\n\n[trip_detection_px200.md]\n## Summary\nPX-200 devices infer trips from a combination of ignition state, motion, and GPS quality.\n\n---\n\n[trip_detection_px200.md]\n# PX-200 Trip Detection Troubleshooting\n\n---\n\n[trip_detection_px200.md]\n## Notes\n- Repeated ignition anomalies often correlate with missing or split trips.\n- On PX-200, unstable ignition is a more common cause of missing trips than total GPS loss.\n\n---\n\n[error_codes_current.md]\n## Codes\n- `E104`: Ignition voltage unstable during trip detection window.\n- `E201`: Battery voltage below operational threshold.\n- `E315`: Temperature probe reading out of expected range.\n- `E412`: GPS lock not acquired within expected startup window."
+      },
+      {
+        "artifact_type": "pandas_code",
+        "content": "# Filter alerts for E104 error code\ne104_alerts = alerts[alerts['alert_type'] == 'error_code']\ne104_alerts = e104_alerts[e104_alerts['sensor_value'] == 'E104']\n\n# Filter assets for PX-200 device model\npx200_assets = assets[assets['device_model'] == 'PX-200']\n\n# Merge to find PX-200 assets with E104 alerts\npx200_e104_alerts = pd.merge(e104_alerts, px200_assets, on='asset_id')\n\n# Filter metrics for PX-200 assets with E104 alerts and no trips\npx200_metrics = metrics[metrics['asset_id'].isin(px200_e104_alerts['asset_id'])]\npx200_no_trips = px200_metrics[px200_metrics['trip_count'] == 0]\n\n# Get unique asset_ids with E104 and no trips\nresult = px200_no_trips['asset_id'].unique().tolist()\n\nif not result:\n    result = \"INSUFFICIENT_DATA: No PX-200 devices with E104 error and zero trips found.\""
+      },
+      {
+        "artifact_type": "query_result",
+        "content": "['A101', 'A102']"
+      }
+    ]
+  },
+  {
+    "question_id": "Q9",
+    "category": "data",
+    "question": "Which assets in the North region had zero trips on 2026-03-11?",
+    "answer": "On 2026-03-11, the assets in the North region that had zero trips were A101, A102, and A110.",
+    "confidence": "high",
+    "is_clarification": false,
+    "clarification_question": null,
+    "sources_used": [
+      "assets",
+      "metrics"
+    ],
+    "caveats": [
+      "The analysis is based on data from only one specific day, 2026-03-11, and does not account for any other days."
+    ],
+    "evidence": [
+      {
+        "source": "assets",
+        "excerpt": "Queried via generated pandas code",
+        "authority": "current"
+      },
+      {
+        "source": "metrics",
+        "excerpt": "Queried via generated pandas code",
+        "authority": "current"
+      }
+    ],
+    "reasoning_artifacts": [
+      {
+        "artifact_type": "pandas_code",
+        "content": "north_assets = assets[assets['region'] == 'North']['asset_id']\nzero_trip_assets = metrics[(metrics['date'] == '2026-03-11') & (metrics['trip_count'] == 0) & (metrics['asset_id'].isin(north_assets))]['asset_id']\nresult = zero_trip_assets.tolist()"
+      },
+      {
+        "artifact_type": "query_result",
+        "content": "['A101', 'A102', 'A110']"
+      }
+    ]
+  },
+  {
+    "question_id": "Q10",
+    "category": "data",
+    "question": "What patterns in the provided data suggest a maintenance follow-up is needed?",
+    "answer": "The data provided is insufficient to determine maintenance patterns. Typically, identifying maintenance needs requires a comprehensive analysis of historical data, including trends in engine performance, frequent alerts, and other maintenance indicators over an extended period. Without this information, it is not possible to accurately assess whether a maintenance follow-up is needed.",
+    "confidence": "low",
+    "is_clarification": false,
+    "clarification_question": null,
+    "sources_used": [],
+    "caveats": [
+      "The data lacks historical context and key indicators necessary for maintenance analysis."
+    ],
+    "evidence": [],
+    "reasoning_artifacts": [
+      {
+        "artifact_type": "pandas_code",
+        "content": "result = \"INSUFFICIENT_DATA: The provided data does not contain enough information to determine maintenance patterns. Maintenance needs typically require historical data over a longer period, including trends in engine performance, frequent alerts, and other maintenance indicators.\""
+      },
+      {
+        "artifact_type": "query_result",
+        "content": "INSUFFICIENT_DATA: The provided data does not contain enough information to determine maintenance patterns. Maintenance needs typically require historical data over a longer period, including trends in engine performance, frequent alerts, and other maintenance indicators."
+      }
+    ]
+  }
+]
