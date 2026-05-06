@@ -1,0 +1,136 @@
+.login-page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-bg-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+    var(--bg-primary);
+  z-index: 0;
+}
+
+.login-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 380px;
+}
+
+.login-brand {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+.login-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, var(--accent-blue), #6366f1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-lg);
+  color: white;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+}
+
+.login-title {
+  font-size: var(--font-2xl);
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.login-subtitle {
+  font-size: var(--font-sm);
+  color: var(--accent-blue);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.login-welcome {
+  margin-bottom: var(--space-2xl);
+}
+
+.login-welcome h2 {
+  font-size: var(--font-xl);
+  font-weight: 700;
+}
+
+.login-welcome p {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.login-field label {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.login-password-wrap {
+  position: relative;
+}
+
+.login-eye {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  display: flex;
+  padding: 4px;
+}
+
+.login-forgot {
+  font-size: var(--font-xs);
+  color: var(--accent-blue);
+  align-self: flex-end;
+}
+
+.login-submit {
+  width: 100%;
+  padding: 14px;
+  font-size: var(--font-base);
+  margin-top: var(--space-sm);
+  border-radius: var(--radius-md);
+}
+
+.login-submit.loading {
+  opacity: 0.7;
+}
+
+.login-signup {
+  text-align: center;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  margin-top: var(--space-2xl);
+}
+
+.login-signup a {
+  color: var(--accent-blue);
+  font-weight: 600;
+}

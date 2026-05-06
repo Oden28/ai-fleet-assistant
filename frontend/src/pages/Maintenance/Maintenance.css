@@ -1,0 +1,9 @@
+.maint-card { margin-bottom: var(--space-sm); }
+.maint-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm); }
+.maint-asset { font-weight: 700; font-size: var(--font-base); }
+.maint-type { display: flex; align-items: center; gap: 6px; font-size: var(--font-sm); color: var(--accent-blue); font-weight: 600; margin-bottom: var(--space-sm); }
+.maint-desc { font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.5; margin-bottom: var(--space-md); }
+.maint-footer { display: flex; justify-content: space-between; align-items: center; font-size: var(--font-xs); }
+.maint-overdue { display: flex; align-items: center; gap: 4px; color: var(--accent-red); font-weight: 600; }
+.maint-upcoming { display: flex; align-items: center; gap: 4px; color: var(--accent-amber); font-weight: 600; }
+.maint-name { color: var(--text-muted); }

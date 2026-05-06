@@ -1,0 +1,6 @@
+.alert-card { padding: var(--space-md) var(--space-lg) !important; margin-bottom: var(--space-sm); }
+.alert-card-header { display: flex; gap: var(--space-md); align-items: flex-start; }
+.alert-card-body { flex: 1; min-width: 0; }
+.alert-card-title { font-size: var(--font-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.alert-card-meta { display: flex; align-items: center; gap: var(--space-sm); font-size: var(--font-xs); color: var(--text-muted); flex-wrap: wrap; }
+.alert-ask { margin-top: var(--space-sm); font-size: var(--font-xs); padding: 4px 10px; }

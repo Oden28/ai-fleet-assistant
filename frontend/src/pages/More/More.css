@@ -1,0 +1,17 @@
+.more-item {
+  display: flex; align-items: center; gap: var(--space-lg);
+  cursor: pointer; margin-bottom: var(--space-sm);
+}
+.more-icon-wrap {
+  width: 44px; height: 44px; border-radius: var(--radius-md);
+  background: var(--accent-blue-soft); color: var(--accent-blue);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.more-info { flex: 1; }
+.more-label { display: block; font-weight: 600; font-size: var(--font-base); }
+.more-desc { display: block; font-size: var(--font-xs); color: var(--text-muted); }
+.more-chevron { color: var(--text-muted); flex-shrink: 0; }
+.more-logout {
+  width: 100%; margin-top: var(--space-3xl); justify-content: center;
+}

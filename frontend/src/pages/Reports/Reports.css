@@ -1,0 +1,5 @@
+.rpt-chart-title { font-size: var(--font-sm); font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-md); }
+.rpt-fuel-row { display: flex; align-items: center; gap: var(--space-md); padding: var(--space-md) var(--space-lg) !important; }
+.rpt-fuel-id { font-weight: 700; font-size: var(--font-sm); min-width: 48px; }
+.rpt-fuel-name { flex: 1; font-size: var(--font-sm); color: var(--text-secondary); }
+.rpt-fuel-val { font-weight: 700; font-size: var(--font-sm); color: var(--accent-green); }

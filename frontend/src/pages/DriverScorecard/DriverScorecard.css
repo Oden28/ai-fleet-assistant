@@ -1,0 +1,25 @@
+.ds-hero { margin-bottom: var(--space-md); }
+.ds-hero-row { display: flex; align-items: center; gap: var(--space-xl); }
+.ds-hero-info h3 { font-size: var(--font-lg); font-weight: 700; }
+.ds-hero-grade { font-size: var(--font-sm); color: var(--text-secondary); }
+.ds-hero-stats { margin-top: var(--space-sm); font-size: var(--font-xs); color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+
+.ds-driver { padding: var(--space-md) var(--space-lg) !important; }
+.ds-driver-header { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-md); }
+.ds-driver-rank { font-size: var(--font-sm); font-weight: 700; color: var(--text-muted); min-width: 28px; }
+.ds-driver-info { flex: 1; }
+.ds-driver-name { display: block; font-weight: 600; font-size: var(--font-sm); }
+.ds-driver-region { font-size: var(--font-xs); color: var(--text-muted); }
+.ds-grade { width: 32px; height: 32px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: var(--font-sm); }
+.ds-grade-a { background: var(--accent-green-soft); color: var(--accent-green); }
+.ds-grade-b { background: var(--accent-blue-soft); color: var(--accent-blue); }
+.ds-grade-c { background: var(--accent-amber-soft); color: var(--accent-amber); }
+.ds-grade-d { background: var(--accent-red-soft); color: var(--accent-red); }
+.ds-grade-f { background: var(--accent-red-soft); color: var(--accent-red); }
+.ds-score { font-weight: 800; font-size: var(--font-lg); min-width: 40px; text-align: right; }
+.ds-bars { display: flex; flex-direction: column; gap: 6px; }
+.ds-bar-item { display: flex; align-items: center; gap: var(--space-sm); font-size: var(--font-xs); color: var(--text-muted); }
+.ds-bar-item span:first-child { min-width: 56px; }
+.ds-bar-item span:last-child { min-width: 30px; text-align: right; font-weight: 600; color: var(--text-secondary); }
+.ds-bar-track { flex: 1; height: 6px; background: var(--bg-primary); border-radius: var(--radius-full); overflow: hidden; }
+.ds-bar-fill { height: 100%; border-radius: var(--radius-full); transition: width 0.8s ease; }
